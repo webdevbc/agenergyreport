@@ -1,0 +1,13 @@
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Ag Energy Analysis for</h6>
+    <h2 class="dashhead-title">Multiple Counties</h2>
+    <%= sanitize @selected_counties.map{|c| link_to(c.name.titleize,c)}.join(', ') %>
+  </div>
+</div>
+<%= render 'counties/shared/statcards' %>
+<%= render 'counties/multiple/overview_table' %>
+<%= render 'counties/shared/crop_production' %>
+<%= render 'counties/shared/livestock_production' %>
+<%= render 'counties/shared/opportunities' %>
+<%= javascript_include_tag 'form_validation', 'data-turbolinks-track': 'reload' %>

@@ -1,0 +1,100 @@
+<div class="mx-auto" id='dual-axis-column-chart-crops'>
+  <script>
+
+    Highcharts.chart('dual-axis-column-chart-crops', {
+      title: {
+        text: ''
+      },
+      chart: {
+        type: 'column'
+      },
+
+      credits: {
+        enabled: false
+      },
+
+      series: [
+        {
+          name: 'Total Energy Cost',
+
+          type: 'column',
+          tooltip: {
+            valuePrefix: '$',
+            valueDecimals: 0
+          },
+          data: <%= @multiple ? @crop_energy_dollars.values : @crop_energy_dollars_hash.values %>
+        }, {
+          name: 'Dollars/Acre',
+          type: 'column',
+          data: <%= @multiple ? @crop_energy_dollars_per_acre_hash.values.first.values : @crop_energy_dollars_per_acre_hash.values %>,
+          yAxis: 1,
+          tooltip: {
+            valuePrefix: '$',
+            valueDecimals: 0,
+            valueSuffix: '/acre'
+          }
+        }
+      ],
+
+      xAxis: [
+        {
+          categories: <%= raw (@multiple ? @crop_energy_dollars.keys : @crop_energy_dollars_hash.keys) %>
+        }
+      ],
+
+      yAxis: [
+        {
+          className: 'highcharts-color-0',
+          labels: {
+            // format: '${value}',
+            style: {
+              color: Highcharts.getOptions().colors[0]
+            }
+          },
+          // min: 0,
+          title: {
+            text: 'Dollars',
+            style: {
+              color: Highcharts.getOptions().colors[0]
+            }
+          }
+        }, {
+          className: 'highcharts-color-1',
+          labels: {
+            // format: '${value}',
+            style: {
+              color: Highcharts.getOptions().colors[1]
+            }
+          },
+          // min: 0,
+          opposite: true,
+          title: {
+            text: 'Dollars/Acre',
+            style: {
+              color: Highcharts.getOptions().colors[1]
+            }
+          }
+        }
+      ],
+
+      tooltip: {
+        // pointFormat: '<b>{series.name} ${point.y:,.0f}</b><br/>'
+        shared: true,
+        style: {
+          textTransform: 'capitalize'
+        }
+      },
+
+      plotOptions: {
+        // column: {   borderRadius: 2 },
+        series: {
+          pointPadding: 0,
+          groupPadding: 0.1,
+          borderWidth: 0
+        }
+      }
+    });
+
+    // @crop_energy_dollars_hash.sort.keys colors: ["#40C0CB"]
+  </script>
+</div>

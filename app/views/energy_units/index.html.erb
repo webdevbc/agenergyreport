@@ -1,0 +1,15 @@
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Documentation</h6>
+    <h2 class="dashhead-title">Fertilizer & Fuel Assumptions</h2>
+  </div>
+</div>
+
+<p><strong>Fertilizer cost</strong> is calculated using recent price data published in the <a href="https://www.ams.usda.gov/mnreports/nw_gr210.txt" title='Iowa Production Cost Report'>Iowa Production Cost Report</a> by the
+  <a href="https://www.ams.usda.gov/market-news" title='USDA Market News Service'>USDA Market News Service</a>. Cost per ton of Anhydrous ammonia (82% N) is converted to cost per pound of Nitrogen (N).</p>
+<p><strong>Fuel cost</strong> is calculated using price data published by the <a href="https://www.eia.gov" target="_blank">U.S. Energy Information Administration</a>. Diesel, gasoline, and electricity prices are last year's average, while propane and heating oil prices are updated weekly during the heating season (Oct - Mar).</p>
+<p>Greenhouse gas emissions of Carbon Dioxide (CO<sub>2</sub>), Methane (CH<sub>4</sub>), Nitrous Oxide (N<sub>2</sub>O), and Carbon Dioxide Equivalent (CO<sub>2</sub>e) are calculated using published conversion factors for each fuel.</p>
+
+
+<%= render partial: 'tabbed_tables', locals: {energy_units: EnergyUnit.fertilizer.order(btu_per_unit: :desc)} %>
+<%= render partial: 'tabbed_tables', locals: {energy_units: EnergyUnit.fuel.order(kg_of_co2e_emissions_per_unit: :desc)} %>

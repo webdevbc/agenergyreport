@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: WINNESHIEK
+  state_alpha: IA
+  state_name: IOWA
+
+two:
+  name: FILLMORE
+  state_alpha: MN
+  state_name: MINNESOTA

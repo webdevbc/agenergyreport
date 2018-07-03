@@ -1,0 +1,106 @@
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">USDA/NASS Statistics</h6>
+    <h2 class="dashhead-title"><%= link_to @county.title, @county %></h2>
+  </div>
+</div>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Statistics", county_statistics_path(@county) %></li>
+  <li class="breadcrumb-item active"><%= @statistic.short_desc %></li>
+</ol>
+
+<table class='table table-sm'>
+  <tbody>
+    <tr>
+      <th>Description</th>
+      <td><%= @statistic.short_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <td><%= @statistic.year %></td>
+    </tr>
+    <tr>
+      <th>Value</th>
+      <td><%= @statistic.value %>
+        <%= @statistic.unit_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>County</th>
+      <td><%= @statistic.county_name.titleize %></td>
+    </tr>
+    <tr>
+      <th>State</th>
+      <td><%= @statistic.state_name.titleize %></td>
+    </tr>
+    <tr>
+      <th>Load Time</th>
+      <td><%= @statistic.load_time %></td>
+    </tr>
+    <tr>
+      <th>Commodity Description</th>
+      <td><%= @statistic.commodity_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Domain Description</th>
+      <td><%= @statistic.domain_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Statistic Category Description</th>
+      <td><%= @statistic.statisticcat_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Frequency Description</th>
+      <td><%= @statistic.freq_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Reference Period Description</th>
+      <td><%= @statistic.reference_period_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Utilization Practice Description</th>
+      <td><%= @statistic.util_practice_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Production Practice Description</th>
+      <td><%= @statistic.prodn_practice_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Class Description</th>
+      <td><%= @statistic.class_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Sector Description</th>
+      <td><%= @statistic.sector_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Group Description</th>
+      <td><%= @statistic.group_desc.titleize %></td>
+    </tr>
+    <tr>
+      <th>Domain Category Description</th>
+      <td><%= @statistic.domaincat_desc.titleize %></td>
+    </tr>
+
+    <% data_source =
+      case @statistic.source_desc
+      when 'SURVEY'
+        link_to('NASS Survey Data', 'https://www.nass.usda.gov/')
+      when 'CENSUS'
+        link_to('USDA Ag Census', 'https://www.agcensus.usda.gov')
+      end
+    %>
+
+      <tr>
+        <th>Source</th>
+        <td><%= data_source %>,
+          <%= @statistic.year %></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%# debug @statistic %>

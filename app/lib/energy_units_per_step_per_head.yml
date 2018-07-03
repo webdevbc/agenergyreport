@@ -1,0 +1,143 @@
+chickens:
+  electricity:
+    layers:
+      - step: &poultry_electricity
+          slug: 'poultry_electricity'
+          name: Electricity
+          energy_units_used: 35
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+    broilers:
+      - step: *poultry_electricity
+hogs:
+  diesel:
+    - step: &hogs_fuel_repairs_utilities
+        slug: 'hogs_fuel_repairs_utilities'
+        name: Fuel, Repairs, Utilities
+        energy_units_used: 1.52
+        source_text: Source Needed
+        source_url: #
+        notes:
+        sort_order: 0
+  electricity:
+    - step: &hogs_electricity
+        slug: 'hogs_electricity'
+        name: Electricity
+        energy_units_used: 47.5
+        source_text: Source Needed
+        source_url: #
+        notes:
+        sort_order: 0
+cattle:
+  diesel:
+    dairy cows:
+      - step: &dairy_feed
+          slug: 'dairy_feed'
+          name: Feed – Forage Imported
+          energy_units_used: 28.51
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+    beef cows:
+      - step: &beef_cow_feed
+          slug: 'beef_cow_feed'
+          name: Feed – Forage Imported
+          energy_units_used: 80
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+    other:
+      - step: &beef_feed
+          slug: 'beef_feed'
+          name: Feed – Forage Imported
+          energy_units_used: 3.98
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+  gasoline:
+    other:
+      - step: &beef_manure_hauling
+          slug: 'beef_manure_hauling'
+          name: Manure Hauling
+          energy_units_used: 0.55
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+      - step: &beef_transportation
+          slug: 'beef_transportation'
+          name: Transportation
+          energy_units_used: 3
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+  propane:
+    dairy cows:
+      - step: &dairy_propane
+          slug: 'dairy_propane'
+          name: Propane
+          energy_units_used: 0.45
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+  heating_oil:
+    dairy cows:
+      - step: &dairy_fuel_oil
+          slug: 'dairy_fuel_oil'
+          name: Heating Oil
+          energy_units_used: 3.36
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+  electricity:
+    dairy cows:
+      - step: &dairy_lighting_ventilation
+          slug: 'dairy_lighting_ventilation'
+          name: Lighting and Ventilation
+          energy_units_used: 811
+          source_text: Wisconsin Energy Efficiency and Renewable Energy Resource
+          source_url: http://www.uwex.edu/energy/dairy.html
+          notes:  'In general, dairy farms use between 800 and 1200 kWh/cow-yr of electricity but in one study the range was from 424 to 1736 kWh/cow-year.'
+          sort_order: 7
+      - step: &milk_harvesting
+          slug: 'milk_harvesting'
+          name: Milk Harvesting
+          energy_units_used: 54.4
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 8
+      - step: &milk_cooling
+          slug: 'milk_cooling'
+          name: Milk Cooling
+          energy_units_used: 150
+          source_text: Source Needed
+          source_url: #
+          notes: Assumes 15,000 lbs. milk produced/year/cow
+          sort_order: 9
+    beef cows:
+      - step: &beef_cow_utilities
+          slug: 'beef_cow_utilities'
+          name: Utilities
+          energy_units_used: 173.2
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0
+    other:
+      - step: &beef_utilities
+          slug: 'beef_utilities'
+          name: Utilities
+          energy_units_used: 38.2
+          source_text: Source Needed
+          source_url: #
+          notes:
+          sort_order: 0

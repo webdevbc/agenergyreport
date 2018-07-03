@@ -1,0 +1,73 @@
+<%= form_for(step) do |f| %>
+<% if step.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(step.errors.count, "error") %>
+      prohibited this step from being saved:</h2>
+
+    <ul>
+      <% step.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= f.label :type %>
+  <%= f.text_field :type %>
+</div>
+
+<div class="field">
+  <%= f.label :slug %>
+  <%= f.text_field :slug %>
+</div>
+
+<div class="field">
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+
+<div class="field">
+  <%= f.label :cost %>
+  <%= f.text_field :cost %>
+</div>
+
+<div class="field">
+  <%= f.label :energy_unit_id %>
+  <%= f.text_field :energy_unit_id %>
+</div>
+
+<div class="field">
+  <%= f.label :energy_units_used %>
+  <%= f.text_field :energy_units_used %>
+</div>
+
+<div class="field">
+  <%= f.label :category %>
+  <%= f.text_field :category %>
+</div>
+
+<div class="field">
+  <%= f.label :subcategory %>
+  <%= f.text_field :subcategory %>
+</div>
+
+<div class="field">
+  <%= f.label :source_text %>
+  <%= f.text_field :source_text %>
+</div>
+
+<div class="field">
+  <%= f.label :source_url %>
+  <%= f.text_field :source_url %>
+</div>
+
+<div class="field">
+  <%= f.label :notes %>
+  <%= f.text_field :notes %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

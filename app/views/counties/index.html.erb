@@ -1,0 +1,38 @@
+<%= render 'application/under_development' %>
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h2 class="dashhead-title">Estimate Agricultural Energy Use</h2>
+  </div>
+</div>
+<% flash.each do |key, value| %>
+  <div class="<%= flash_class(key) %>">
+    <%= value %>
+  </div>
+<% end %>
+<%= content_tag(:p, '1.', class: 'text-muted', style: 'float:left;padding-right: 1rem') %>
+<div id="directions">Select
+  <strong>one</strong>
+  or
+  <strong>more</strong>
+  counties to create a report on annual energy use in the ag production sector:</div>
+
+<div id="chartdiv"></div>
+
+<%= form_tag(counties_multiple_path, method: "get") do %>
+<fieldset class="form-group">
+  <%= hidden_field_tag 'selectedCounties' %>
+</fieldset>
+<hr>
+<%= content_tag(:p, '2.', class: 'text-muted', style: 'float:left;padding-right: 1rem') %>
+<div id="info">
+  <strong>Selected counties:</strong>
+  <span id="selected">-</span></div>
+<%= submit_tag("View Annual Energy Report", class: "btn btn-primary", style: 'display:inline') %>
+<hr>
+<% end %>
+
+<%= javascript_include_tag 'ammap' %>
+<%= javascript_include_tag 'light' %>
+<%= javascript_include_tag 'maps/iowaHigh' %>
+<%= javascript_include_tag 'iowa_mmbtus' %>
+<%= javascript_include_tag 'iowa_county_map' %>

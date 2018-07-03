@@ -1,0 +1,244 @@
+<h3 class='mt-5 mb-3' id='crop-production'>Crop Production ($<%= number_to_human( @multiple ? @crop_energy_dollars.values.sum : @crop_energy_dollars) %>)</h3>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a href="#crop-summary" class="nav-link active" role="tab" data-toggle="tab" aria-controls="crop-summary">Crop Summary</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a href="#crop-assumptions" class="nav-link" role="tab" data-toggle="tab" aria-controls="crop-assumptions">Assumptions</a>
+  </li>
+  <% unless @multiple %>
+  <li class="nav-item" role="presentation">
+    <a href="#land-use" class="nav-link" role="tab" data-toggle="tab" aria-controls="land-use">Land Area and Use</a>
+  </li>
+  <% end #unless @multiple %>
+</ul>
+
+<div class="tab-content mt-4">
+  <div role="tabpanel" class="tab-pane active" id="crop-summary">
+    <div class="row text-center m-t-md">
+      <div class="col-md-4 mb-5">
+        <div class="mx-auto">
+          <%= column_chart((@multiple ? @combined_acres.sort : @acres.sort), colors: ["#40C0CB"], library: { yAxis: { min: 0, title: { text: 'Acres' } }, tooltip: { pointFormat: '<b>{point.y:,.0f}</b> acres', style: { textTransform: 'capitalize' } }, plotOptions: { series: { allowPointSelect:
+          true } } }) %>
+        </div>
+        <h4>Acres Harvested</h4>
+        <% unless @multiple %>
+        <a
+          tabindex="0"
+          role="button"
+          data-trigger="focus"
+          class="btn btn-secondary"
+          data-toggle="popover"
+          data-placement="bottom"
+          data-html="true"
+          data-content='The <%= link_to "USDA Ag Census and NASS Survey data for #{ @county.title }", county_statistics_path(@county) %> provides numbers on how many acres of each crop is harvested annually.
+          <br><%= latest_crop_stats_list(@county) %>
+          '>
+          <span class="icon icon-database"></span>
+          About the Data</a>
+          <% end #unless @multiple  %>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <%= render 'dual_axis_column_chart', locals: {sector: 'crop' } %>
+        <h4>Energy Cost by Crop</h4>
+        <a
+          tabindex="0"
+          role="button"
+          data-trigger="focus"
+          class="btn btn-secondary"
+          data-toggle="popover"
+          data-placement="bottom"
+          data-html="true"
+          data-content='<h6>Energy Cost =</h6> Acres Harvested &times; <em>Energy Cost Per Acre</em><br><br>
+          <ul class="list-unstyled">
+            <% (@multiple ? @crop_energy_dollars_per_acre_hash.values.first : @crop_energy_dollars_per_acre_hash).each do |crop, dpa| # fixme: problem where first county doesn't have all crops raised%>
+            <li class="py-1"><strong><%= crop.capitalize %>:</strong>&nbsp; <%= number_to_currency(dpa) %>/acre</li>
+            <% end %>
+          </ul>
+          <em>Energy cost per acre for each cropping practice is equal to <%= link_to "the sum of fertilizer use, propane  and  electricity  use  for  drying,  diesel  in  field  operations  per acre", crop_assumptions_path %>, multipled by the <%= link_to "cost of each fuel or fertilizer", energy_units_path %>.
+          '>
+          <span class="icon icon-calculator"></span>
+          About the Math</a>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="mx-auto">
+          <%= pie_chart([["Drying", (@multiple ? @crop_drying_dollars.values.sum : @crop_drying_dollars)], ["Fertilizer", (@multiple ? @crop_fertilizer_dollars.values.sum : @crop_fertilizer_dollars)], ["Field Operations", (@multiple ? @crop_field_dollars.values.sum : @crop_field_dollars)] ], library: { tooltip: { pointFormat: '<b>${point.y:,.0f}</b><br/>' }, plotOptions: { series: { allowPointSelect:
+          true }, pie: { dataLabels: { enabled: false }, showInLegend: true } } }) %>
+        </div>
+        <h4>Energy Cost by Category</h4>
+        <a
+          tabindex="0"
+          role="button"
+          data-trigger="focus"
+          class="btn btn-secondary"
+          data-toggle="popover"
+          data-placement="bottom"
+          data-html="true"
+          data-content='<h6>Drying</h6><p>Annual drying cost is highly variable, but involves the cost of propane and electricity.</p> <h6>Fertilizer</h6><p>Fertilizer is the N, P, and K applied to each acre of a given crop/rotation practice. <%= link_to "View Cost Estimates", energy_units_path %></p><h6>Field Operations</h6><p>Field Operations include the diesel fuel required for each pass over an acre of field, given a particular crop, tillage practice, and crop rotation. <%= link_to "View data for each crop scenario here.", crop_assumptions_path %></p>'>
+          <span class="icon icon-colours"></span>
+          About the Categories</a>
+      </div>
+    </div>
+    <!-- close row -->
+  </div>
+  <!-- close inner tabpanel -->
+
+  <div role="tabpanel" class="tab-pane" id="crop-assumptions">
+    <div class="row">
+      <div class="col-lg-4 mb-5">
+        <h5 class='mb-2'>Energy use per Acre</h5>
+        <%= link_to "Field Operations, Fertilizer Use, and Drying Requirements per Acre", crop_assumptions_path %>
+        <p>
+          <strong>Data source:</strong>
+          Iowa State University Extension</p>
+
+        <h5 class='mb-2'>USDA/NASS Data</h5>
+        <% if @multiple %>
+        <%= "Statistics from #{ @selected_counties.count} counties" %>. <%= link_to "(e.g., #{ @selected_counties.first.title })", county_statistics_path(@selected_counties.first) %>
+        <% else %>
+        <%= link_to "All Statistics for #{ @county.title }", county_statistics_path(@county) %>
+        <% end %>
+        <p>
+          <strong>Data source:</strong>
+          USDA Ag Census, NASS Survey</p>
+
+      </div>
+      <div class="col-lg-4 mb-5">
+        <h5 class='mb-2'>Tillage Assumptions</h5>
+        <div class="list-group mb-3">
+          <a class="list-group-item list-group-item-action justify-content-between" href="#">
+            <span class="list-group-progress" style="width: <%= number_to_percentage(@tillage_factor['intensive_tillage']*100, precision: 0) %>;"></span>
+            <span>Intensive Tillage</span>
+            <span class="text-muted"><%= number_to_percentage(@tillage_factor['intensive_tillage']*100, precision: 0) %></span>
+          </a>
+
+          <a class="list-group-item list-group-item-action justify-content-between" href="#">
+            <span class="list-group-progress" style="width: <%= number_to_percentage(@tillage_factor['reduced_tillage']*100, precision: 0) %>;"></span>
+            <span>Reduced Tillage</span>
+            <span class="text-muted"><%= number_to_percentage(@tillage_factor['reduced_tillage']*100, precision: 0) %></span>
+          </a>
+
+          <a class="list-group-item list-group-item-action justify-content-between" href="#">
+            <span class="list-group-progress" style="width: <%= number_to_percentage(@tillage_factor['no_tillage']*100, precision: 0) %>;"></span>
+            <span>No Till</span>
+            <span class="text-muted"><%= number_to_percentage(@tillage_factor['no_tillage']*100, precision: 0) %></span>
+          </a>
+        </div>
+        <!-- close list-group -->
+        <p>
+          <strong>Data source:</strong>
+          Not available. Customize this value below.</p>
+      </div>
+      <!-- close col -->
+
+      <div class="col-lg-4 mb-5">
+        <h5 class='mb-2'>Rotation Assumptions</h5>
+        <div class="list-group mb-3">
+          <a class="list-group-item list-group-item-action justify-content-between" href="#">
+            <span class="list-group-progress" style="width: <%= number_to_percentage(@rotation_factor ['following_corn']*100, precision: 0) %>;"></span>
+            <span>Corn followed by Corn</span>
+            <span class="text-muted"><%= number_to_percentage(@rotation_factor ['following_corn']*100, precision: 0) %></span>
+          </a>
+
+          <a class="list-group-item list-group-item-action justify-content-between" href="#">
+            <span class="list-group-progress" style="width: <%= number_to_percentage(@rotation_factor ['following_soybeans']*100, precision: 0) %>;"></span>
+            <span>Corn followed by Soybeans</span>
+            <span class="text-muted"><%= number_to_percentage(@rotation_factor ['following_soybeans']*100, precision: 0) %></span>
+          </a>
+        </div>
+        <!-- close list-group -->
+        <p>
+          <strong>Data source:</strong>
+          Not available. Customize this value below.</p>
+      </div>
+      <!-- close col -->
+    </div>
+    <!-- close row -->
+  </div>
+  <!-- close inner tabpanel -->
+
+  <% unless @multiple %>
+  <div role="tabpanel" class="tab-pane" id="land-use">
+    <div class="list-group mb-3">
+      <h6 class="list-group-item list-group-item-action justify-content-between py-4">
+        <span class="list-group-progress" style="width: 100%;"></span>
+        <span>
+          <strong>Total Land Area</strong>
+        </span>
+        <span class="text-muted">
+          <strong><%= number_with_delimiter(@county.land_area_acres) %>
+            acres</strong>
+          (Ag Census:
+          <%= @county.land_area_acres_year %>)</span>
+      </h6>
+
+      <a class="list-group-item list-group-item-action justify-content-between py-2" href="#">
+        <span class="list-group-progress" style="width: <%= 100 * @county.agland_acres / @county.land_area_acres %>%;"></span>
+        <span>- - -
+          <strong>Ag Land</strong>
+        </span>
+        <span class="text-muted"><%= number_with_delimiter(@county.agland_acres) %>
+          acres (Ag Census:
+          <%= @county.cropland_acres_year %>)</span>
+      </a>
+
+      <a class="list-group-item list-group-item-action justify-content-between py-1" href="#">
+        <span class="list-group-progress" style="width: <%= 100 * @county.cropland_acres / @county.land_area_acres %>%;"></span>
+        <span>- - - - - - Cropland</span>
+        <span class="text-muted"><%= number_with_delimiter(@county.cropland_acres) %>
+          acres (Ag Census:
+          <%= @county.cropland_acres_year %>)</span>
+      </a>
+
+      <a class="list-group-item list-group-item-action justify-content-between py-1" href="#">
+        <span class="list-group-progress" style="width: <%= 100 * @county.cropland_harvested_acres / @county.land_area_acres %>%;"></span>
+        <span>- - - - - - Cropland Harvested</span>
+        <span class="text-muted"><%= number_with_delimiter(@county.cropland_harvested_acres) %>
+          acres (Ag Census:
+          <%= @county.cropland_acres_year %>)</span>
+      </a>
+
+      <%- @acres.sort_by{ |k, v| v.to_i }.reverse.to_h.each do |crop_name, crop_acres| -%>
+
+        <a class="list-group-item list-group-item-action justify-content-between py-0" href="#">
+          <span class="list-group-progress" style="width: <%= 100 * crop_acres.to_i / @county.land_area_acres %>%;"></span>
+          <span>- - - - - - - - - - - -
+            <em><%= crop_name.capitalize %></em>
+          </span>
+          <span class="text-muted"><%= number_with_delimiter(crop_acres) %>
+            acres (NASS / Ag Census)</span>
+        </a>
+
+        <%- end -%>
+
+          <a class="list-group-item list-group-item-action justify-content-between py-1" href="#">
+            <span class="list-group-progress" style="width: <%= 100 * @county.pastureland_acres / @county.land_area_acres %>%;"></span>
+            <span>- - - - - - Pastureland</span>
+            <span class="text-muted"><%= number_with_delimiter(@county.pastureland_acres) %>
+              acres (Ag Census:
+              <%= @county.cropland_acres_year %>)</span>
+          </a>
+
+          <a class="list-group-item list-group-item-action justify-content-between py-1" href="#">
+            <span class="list-group-progress" style="width: <%= 100 * @county.woodland_acres / @county.land_area_acres %>%;"></span>
+            <span>- - - - - - Woodland</span>
+            <span class="text-muted"><%= number_with_delimiter(@county.woodland_acres) %>
+              acres (Ag Census:
+              <%= @county.cropland_acres_year %>)</span>
+          </a>
+
+          <a class="list-group-item list-group-item-action justify-content-between py-1" href="#">
+            <span class="list-group-progress" style="width: <%= 100 * @county.other_agland_acres / @county.land_area_acres %>%;"></span>
+            <span>- - - - - - Other Ag Land</span>
+            <span class="text-muted"><%= number_with_delimiter(@county.other_agland_acres) %>
+              acres (Ag Census:
+              <%= @county.cropland_acres_year %>)</span>
+          </a>
+        </div>
+        <!-- close list-group -->
+      </div>
+      <!-- close inner tabpanel -->
+      <% end %>
+    </div>
+    <!-- close inner tabcontent -->

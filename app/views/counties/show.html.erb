@@ -1,0 +1,14 @@
+<%= render 'application/under_development' %>
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Ag Energy Analysis for</h6>
+    <h2 class="dashhead-title"><%= @county.title %></h2>
+  </div>
+</div>
+
+<%= render 'counties/shared/statcards' %>
+<%= render 'counties/shared/crop_production' %>
+<%= render 'counties/shared/livestock_production' %>
+<%= render 'counties/shared/opportunities' %>
+<%= javascript_include_tag 'form_validation', 'data-turbolinks-track': 'reload' %>
+<%# console %>

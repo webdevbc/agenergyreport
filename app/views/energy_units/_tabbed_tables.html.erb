@@ -1,0 +1,97 @@
+<ul class="nav nav-tabs" role="tablist">
+  <% energy_units.order(:name).each_with_index do |eu, i| %>
+    <li class="nav-item" role="presentation">
+      <a href="#<%= eu.slug %>" class="nav-link <%= if i == 0 then 'active' end %>" role="tab" data-toggle="tab" aria-controls="<%= eu.slug %>"><%= eu.name %><%= if eu.slug == 'fertilizer' then '*' end %></a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content mt-4">
+  <% energy_units.order(:name).each_with_index do |eu, i|  %>
+    <div role="tabpanel" class="tab-pane <%= if i == 0 then 'active' end %>" id="<%= eu.slug %>">
+      <h6><%= eu.eia_cost_description %></h6>
+      <table class='table table-bordered mb-0'>
+        <thead class="thead-light">
+          <tr>
+            <th>Cost</th>
+            <th>Updated</th>
+            <th>Data Period</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$<%= eu.dollars_per_unit %>
+              /
+              <span title="<%= eu.unit %>"><%= eu.unit_short %></span></td>
+            <td><%= eu.eia_updated && eu.eia_updated.to_formatted_s(:month_day_year) %></td>
+            <td><%= eu.eia_latest_data_period %></td>
+            <td>
+              <% if eu.source_cost == 'ams' %>
+                <a href="https://www.ams.usda.gov/mnreports/nw_gr210.txt" title='Iowa Production Cost Report'>USDA Market News Service: Iowa Production Cost Report</a>
+              <% elsif eu.source_cost == 'eia' %>
+                <a href="http://www.eia.gov" title="U.S. Energy Information Administration (EIA)">EIA.gov</a>
+                |
+                <%= link_to('OpenData Link', "http://www.eia.gov/opendata/qb.cfm?sdid=#{eu.eia_series_id_code}") %>
+              <% else %>
+                n/a
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <h6>Conversion Factors</h6> -->
+      <table class='table table-bordered mb-5'>
+        <thead class="thead-light">
+          <tr>
+            <th>BTU /
+              <%= eu.unit_short %></th>
+            <th>CO<sub>2</sub>
+              <small>
+                (kg)</small>
+              /
+              <%= eu.unit_short %></th>
+            <th>CH<sub>4</sub>
+              <small>
+                (kg)</small>
+              /
+              <%= eu.unit_short %></th>
+            <th>N<sub>2</sub>O<small>
+                (kg)</small>
+              /
+              <%= eu.unit_short %></th>
+            <th>CO<sub>2</sub>e<small>
+                (kg)</small>
+              /
+              <%= eu.unit_short %></th </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= number_with_delimiter(eu.btu_per_unit) %>
+                <br>
+                <small>(Source:
+                  <%= link_to eu.source_text_btu_per_unit, eu.source_url_btu_per_unit %>)</small>
+              </td>
+              <td><%= eu.kg_of_co2_emissions_per_unit %>
+                <br>
+                <small>(Source:
+                  <%= link_to eu.source_text_kg_of_co2_emissions_per_unit, eu.source_url_kg_of_co2_emissions_per_unit %>)</small>
+              </td>
+              <td><%= eu.kg_of_n2o_emissions_per_unit %><br>
+                <small>(Source:
+                  <%= link_to eu.source_text_kg_of_n2o_emissions_per_unit, eu.source_url_kg_of_n2o_emissions_per_unit %>)</small>
+              </td>
+              <td><%= eu.kg_of_ch4_emissions_per_unit %><br>
+                <small>(Source:
+                  <%= link_to eu.source_text_kg_of_ch4_emissions_per_unit, eu.source_url_kg_of_ch4_emissions_per_unit %>)</small>
+              </td>
+              <td><%= eu.kg_of_co2e_emissions_per_unit %><br>
+                <small>(Source:
+                  <%= link_to eu.source_text_kg_of_co2e_emissions_per_unit, eu.source_url_kg_of_co2e_emissions_per_unit %>)</small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>

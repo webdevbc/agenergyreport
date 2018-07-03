@@ -1,0 +1,130 @@
+<h3 class='mt-5 mb-3'>Economic and Stewardship Opportunities</h3>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a href="#customize" class="nav-link active" role="tab" data-toggle="tab" aria-controls="customize">Enter Your Own Values</a>
+  </li>
+</ul>
+
+<div class="tab-content mt-4">
+  <div role="tabpanel" class="tab-pane active" id="customize">
+    <div class="row">
+
+      <div class="col-lg-4 mb-5">
+
+        <p>Selecting the right amount of tillage is a critical decision for farm energy use and profitability. Similar to other farm management decisions such as nitrogen fertilizer use for corn, or ventilation rate in a livestock confinement, overuse wastes
+          energy but underuse can lower profitability.</p>
+        <p>A key is to carefully consider potential for gross revenue returns to tillage operations, (i.e., crop yield), in comparison to fuel, labor, and machinery costs for doing tillage. Put another way, are tillage passes beyond a no-till management
+          scheme returning costs of fuel, labor, and machinery that are required of the tillage?</p>
+      </div>
+      <!-- close col -->
+
+      <div class="col-lg-4 mb-5">
+
+        <h5 class='mb-2'>Tillage Practice Assumptions</h5>
+        <p class="text-muted">Enter the overall percentage of crops using the following tillage practices:
+        </p>
+        <%= form_tag((@multiple ? counties_multiple_path(selectedCounties: params['selectedCounties']) : county_path(@county)), id: 'tillage_practice_input', class: 'needs-validation', novalidate: true, method: "get") do %>
+        <%= hidden_field_tag 'selectedCounties', params[:selectedCounties] %>
+
+        <% Operation.distinct.pluck(:tillage_practice).compact.each do |tillage_practice| %>
+          <div class="form-group row">
+            <label for="<%= tillage_practice %>" class="col-sm-7 col-form-label"><%= link_to(humanize(tillage_practice), crop_assumptions_path(anchor: "operation-#{Operation.corn_grain.with_tillage_practice(tillage_practice).take.id}"), title: "#{humanize(tillage_practice)} Assumptions for Corn") %></label>
+            <div class="col-sm-5">
+              <div class="input-group">
+                <%= text_field_tag tillage_practice, number_with_precision(@tillage_factor[tillage_practice]*100, precision: 0), class: "form-control", 'aria-label': "Percentage (whole number)" %>
+                <div class="input-group-append">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+      <!-- close col -->
+
+      <div class="col-lg-4 mb-5">
+
+        <h5 class='mb-2'>Rotation Practice Assumptions</h5>
+        <p class="text-muted">Enter the overall percentage of corn using the following rotation practices:</p>
+
+        <% ['following_corn', 'following_soybeans'].each do |rotation_practice| %>
+          <div class="form-group row">
+            <label for="<%= rotation_practice %>" class="col-sm-7 col-form-label"><%= link_to(humanize(rotation_practice), crop_assumptions_path, title: "#{humanize(rotation_practice)} Assumptions for Corn") %></label>
+            <div class="col-sm-5">
+              <div class="input-group">
+                <%= text_field_tag rotation_practice, number_with_precision(@rotation_factor[rotation_practice]*100, precision: 0), class: "form-control", 'aria-label': "Percentage (whole number)" %>
+                <div class="input-group-append">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= button_tag 'Update Report', id: 'update-crop-practices-button', class: "btn btn-primary btn-block", data: { disable_with: "Please wait..."} %>
+
+        <% end %>
+        <%= form_tag((@multiple ? counties_multiple_path : county_path(@county)), method: "get", class: 'form') do %>
+        <div class="invalid-feedback">
+          Please provide valid input.
+        </div>
+
+        <%= hidden_field_tag 'selectedCounties', params[:selectedCounties] %>
+        <%= hidden_field_tag 'reset', true %>
+        <%= button_tag 'Reset', class: "btn btn-outline-warning mt-4 btn-block", data: { disable_with: "Please wait..." } %>
+      </div>
+
+    </div>
+    <!-- close col -->
+  <% end %>
+
+</div>
+<!-- close row -->
+<div class="row">
+
+  <div class="col-lg-4 mb-5">
+    <p>Energy efficiency improvements and on-site solar are viable options for most farmers. More efficient lighting, pumps, and motors can lead to a 20% reduction in electricity use, and solar panels installed on-farm can generate 30-50% of the
+      electricity used in livestock production and/or grain drying.</p>
+  </div>
+  <!-- close col -->
+
+  <div class="col-lg-4 mb-5">
+
+    <h5 class='mb-2'>Electrical Efficiency Savings</h5>
+    <p class="text-muted">Enter the percentage of electric energy savings through energy efficiency measures and on-site solar (e.g., 20% savings):</p>
+
+    <div class="form-group row">
+      <%= form_tag((@multiple ? counties_multiple_path : county_path(@county)), id: 'electrical_efficiency_input', method: "get") do %>
+      <%= hidden_field_tag 'selectedCounties', params[:selectedCounties] %>
+      <div class="col-sm-5">
+        <div class="input-group">
+          <%= text_field_tag 'energy_savings_factor', number_with_precision(@energy_savings_factor*100, precision: 0), class: "form-control", 'aria-label': "Percentage (whole number)" %>
+          <div class="input-group-append">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= button_tag 'Update Report', class: "btn btn-danger btn-block", data: { disable_with: "Please wait..."} %>
+
+    <% end %>
+    <%= form_tag((@multiple ? counties_multiple_path : county_path(@county)), method: "get", class: 'form') do %>
+    <%= hidden_field_tag 'selectedCounties', params[:selectedCounties] %>
+    <%= hidden_field_tag 'reset_energy', true %>
+    <%= button_tag 'Reset', class: "btn btn-outline-warning mt-4 btn-block", data: { disable_with: "Please wait..." } %>
+  </div>
+<% end %>
+
+</div>
+<!-- close col -->
+
+</div>
+<!-- close row -->
+
+</div>
+<!-- close inner tabpanel -->
+</div>
+<!-- close inner tabcontent -->

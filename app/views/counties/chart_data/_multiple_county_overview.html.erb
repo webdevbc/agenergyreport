@@ -1,0 +1,21 @@
+data = [
+  {
+    y: <%= @crop_energy_dollars.values.sum %>,
+    color: colors[1],
+    drilldown: {
+      name: 'Crops',
+      categories: <%= raw @crop_energy_dollars.keys %>,
+      data: <%= raw @crop_energy_dollars.values %>,
+      color: colors[0]
+    }
+  }, {
+    y: <%= @livestock_energy_dollars.values.sum %>,
+    color: colors[4],
+    drilldown: {
+      name: 'Livestock',
+      categories: <%= raw @livestock_energy_dollars.keys %>,
+      data: <%= raw @livestock_energy_dollars.values %>,
+      color: colors[4]
+    }
+  }
+],

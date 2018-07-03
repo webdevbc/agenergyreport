@@ -1,0 +1,56 @@
+<div class='row'>
+  <div class='col'>
+    <div class="dashhead mt-4">
+      <div class="dashhead-titles">
+        <h6 class="dashhead-subtitle">USDA/NASS Statistics</h6>
+        <h2 class="dashhead-title"><%= link_to @county.title, @county %></h2>
+      </div>
+    </div>
+    <p>The
+      <a href="https://www.agcensus.usda.gov">USDA Census of Agriculture</a>
+      collects data every 5 years (e.g., 2017, 2012, 2007), while the
+      <a href="https://www.nass.usda.gov">NASS Agricultural Survey</a>
+      collects a smaller amount of data annually.</p>
+
+    <ul class="nav nav-tabs" role="tablist">
+      <% @years.each do |year|%>
+        <li class="nav-item" role="presentation">
+          <a href="#statistics-<%= year %>" class="nav-link <%= if year.to_i%5 == 2 then 'text-success' end %> <%= if year == @years.first then 'active' end %>" role="tab" data-toggle="tab" aria-controls="statistics-<%= year %>">
+            <%= year %></a>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content mt-4">
+      <% @years.each do |year|%>
+        <div role="tabpanel" class="tab-pane<%= if year == @years.first then ' active' end %>" id="statistics-<%= year %>">
+          <%= render partial: 'counties/nass_stats_by_year', locals: {year: year} %>
+        </div>
+      <% end %>
+    </div>
+
+    <h4 id='suppressed_values_explained'>(D)*: Suppressed/Censored Values</h4>
+
+    <p>Based on USDA/NASS standards, these values were determined by NASS to be sensitive to a disclosure of information if they violated either of two criteria rules.
+    </p>
+
+    <p>1) The threshold rule was violated if the data cell contained less than three operations. For example, if only one farmer produced turkeys in a county, NASS could not publish the county total for turkey inventory without disclosing that
+      individual’s information.
+    </p>
+
+    <p>
+      <em>or</em>
+    </p>
+
+    <p>2) The dominance rule was violated if the distribution of the data within the cell allowed a data user to estimate any respondent’s data too closely. For example, if there are many farmers producing turkeys in a county and some of them were large
+      enough to dominate the cell total, NASS could not publish the county total for turkey inventory without risking disclosing an individual respondent’s data.
+    </p>
+
+    <p>In both of these situations, the data were suppressed and a “(D)” was placed in the cell in the census publication table. These data cells were referred to as primary suppressions.</p>
+
+    <p>Since most items were summed to marginal totals, primary suppressions within these summation relationships were protected by ensuring that there were additional suppressions within the linear relationship that provided adequate protection for the
+      primary. A detailed computer routine selected additional data cells for suppression to ensure all primary suppressions were properly protected in all linear relationships in all tables. These data cells were referred to as complementary suppressions.
+      These cells were not themselves sensitive to a disclosure of information but were suppressed to protect other primary suppressions. A “(D)” was also placed in the cell of the census publication table to indicate a complementary suppression. A data
+      user could not determine whether a cell with a (D) represented a primary or a complementary suppression.</p>
+  </div>
+</div>

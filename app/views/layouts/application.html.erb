@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Agricultural Energy Report Tool</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <a class="navbar-brand" href="/" data-turbolinks="false">
+          <%= image_tag("logo175.png", size: "202x87", alt: "Ag Energy Report Logo") %>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About the Calculations</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item <%= 'active' if current_page?(crop_assumptions_path) %>" href="<%= crop_assumptions_path %>">Crop Assumptions</a>
+                <a class="dropdown-item <%= 'active' if current_page?(livestock_assumptions_path) %>" href="<%= livestock_assumptions_path %>">Livestock Assumptions</a>
+                <a class="dropdown-item <%= 'active' if current_page?(energy_units_path) %>" href="<%= energy_units_path %>">Fertilizer &amp; Fuel Assumptions</a>
+                <a class="dropdown-item <%= 'active' if current_page?('/counties/1/statistics') %>" href="/counties/1/statistics">USDA/NASS Survey Data (Example County)</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= 'active' if current_page?(links_path) %>" href="<%= links_path %>">Resources</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <main role="main" class="container">
+      <%= yield %>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">A project of the
+          <a href="http://energydistrict.org" title="Winneshiek Energy District Website">Winneshiek Energy District</a>
+          with funding provided through a
+          <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/energy/" title="NRCS Energy">NRCS</a>
+          <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/cig/" title="NRCS CIG Grants Website">Conservation Innovation Grant</a>
+        </span>
+      </div>
+    </footer>
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        },
+        i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-101746742-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

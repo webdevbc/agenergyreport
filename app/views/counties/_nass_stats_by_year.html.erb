@@ -1,0 +1,39 @@
+<table class='table table-bordered table-sm'>
+	<thead class="thead-light">
+		<tr>
+			<% if year.to_i%5 == 2 %>
+				<th><%= year %>
+					Statistics
+					<small>(Sources:
+						<a href="https://www.agcensus.usda.gov">USDA Census of Agriculture</a>,
+						<a href="http://www.nass.usda.gov">National Agricultural Statistics Service</a>)</small>
+				</th>
+				<th class='text-left'>Notes</th>
+			<% else %>
+				<th><%= year %>
+					Statistics
+					<small>(Source:
+						<a href="http://www.nass.usda.gov">National Agricultural Statistics Service</a>)</small>
+				</th>
+			<% end %>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @stats.where(year_int: year).order(:short_desc).each do |stat| %>
+			<tr>
+				<td><%= link_to stat.short_desc, stat %></td>
+				<% if year.to_i%5 == 2 %>
+					<td><%= stat.domaincat_desc unless stat.domaincat_desc === "NOT SPECIFIED" %></td>
+				<% end %>
+				<td>
+					<% if stat.suppressed? %>
+						<%= link_to '(D)*', '#suppressed_values_explained' %>
+					<% else %>
+						<%= stat.value + " "+stat.unit_desc.downcase%>
+					<% end %>
+				</td>
+			</tr>
+			<%- end -%>
+			</tbody>
+		</table>

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Documentation</h6>
+    <h2 class="dashhead-title">Operations</h2>
+  </div>
+</div>
+
+<table class='table table-bordered mb-0'>
+  <thead class="thead-light">
+    <tr>
+      <th>Description</th>
+      <% EnergyUnit.find_each do |e| %>
+        <th><%= e.name %> / acre</th>
+      <% end %>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @operations.each do |operation| %>
+      <tr>
+        <td><%= link_to description_plus_tillage_practice(operation), operation.becomes(Operation) %></td>
+        <% EnergyUnit.find_each do |e| %>
+
+
+          <td>
+            <% if operation.energy_units_per_inventory_unit_for(e) != 0 %>
+              <%= operation.energy_units_per_inventory_unit_for(e) %> <%= e.unit_short %>
+            <% else %>
+            <% end %>
+
+          </td>
+        <% end %>
+
+        <td><%# link_to 'Edit', edit_operation_path(operation) %></td>
+        <td><%# link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

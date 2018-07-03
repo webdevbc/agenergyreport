@@ -1,0 +1,67 @@
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Documentation</h6>
+    <h2 class="dashhead-title">Crop Assumptions</h2>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col">
+    <ul class="nav nav-tabs" role="tablist">
+      <% CropOperation.group(:name).select(:name).each_with_index do |group, i| %>
+        <li class="nav-item" role="presentation">
+          <a href="#<%= group.name.parameterize %>" class="nav-link <%= if i == 0 then 'active' end %>" role="tab" data-toggle="tab" aria-controls="<%= group.name.parameterize %>"><%= group.name.titleize %></a>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content mt-4">
+      <% CropOperation.group(:name).select(:name).each_with_index do |group, i| %>
+        <div role="tabpanel" class="tab-pane <%= if i == 0 then 'active' end %>" id="<%= group.name.parameterize %>">
+          <h4 class='text-center'>Annual Fertilizer/Fuel Use per Acre</h4>
+
+          <table class='table table-bordered mb-0'>
+            <thead class="thead-light">
+              <tr>
+                <th>Crop Practice</th>
+                <% EnergyUnit.order(:source_cost, btu_per_unit: :desc).each do |e| %>
+                  <% if CropOperation.where(name: group.name).order(:name, :rotation_practice, :tillage_practice).first.energy_units_per_inventory_unit_for(e) > 0 %>
+                    <th><%= e.name %></th>
+                  <% end %>
+                <% end %>
+              </tr>
+            </thead>
+            <% CropOperation.where(name: group.name).order(:name, :rotation_practice, :tillage_practice).includes(:steps).each do |operation| %>
+              <tr>
+                <td><%= link_to(description_plus_tillage_practice(operation), "#operation-#{operation.id}", data: { turbolinks: false }) %></td>
+                <% EnergyUnit.order(:source_cost, btu_per_unit: :desc).each do |e| %>
+                  <% if operation.energy_units_per_inventory_unit_for(e) > 0 %>
+                      <td><%= "#{round_energy_unit_value(e, operation.energy_units_per_inventory_unit_for(e)) } #{e.unit_short}" %></td>
+                  <% end %>
+                <% end %>
+                <td><%= number_to_currency(operation.cached_energy_dollars_per_inventory_unit) %></td>
+              </tr>
+            <% end %>
+          </table>
+
+          <% CropOperation.where(name: group.name).order(:name, :rotation_practice, :tillage_practice).includes(:steps).each do |operation| %>
+            <h4 id='operation-<%= operation.id %>' class='mt-5'><%= description_plus_tillage_practice(operation) %></h4>
+            <p>
+              <strong>Annual fertilizer/fuel use per
+                <%= operation.unit %></strong>:
+              <% array = Array.new %>
+                <% EnergyUnit.order(:source_cost, btu_per_unit: :desc).each do |e| %>
+                  <% if operation.energy_units_per_inventory_unit_for(e) > 0 %>
+                    <% array.push "#{round_energy_unit_value(e, operation.energy_units_per_inventory_unit_for(e))} #{e.unit_short.downcase} #{e.name}" %><% end %>
+                  <% end %>
+                  <%= array.to_sentence %>
+                <br /><strong>Energy cost per <%= operation.unit %></strong>: <%= number_to_currency(operation.cached_energy_dollars_per_inventory_unit) %></p>
+                <%= render partial: "#{operation.type.underscore}s/#{operation.type.underscore}", locals: { operation: operation } %>
+
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>

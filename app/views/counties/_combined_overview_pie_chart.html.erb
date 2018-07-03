@@ -1,0 +1,149 @@
+<div class="mx-auto" id='combined-overview-pie-chart'>
+  <script>
+
+    var colors = Highcharts.getOptions().colors,
+      categories = [
+        'Crop Production', 'Livestock Production'
+      ],
+      <% if @selected_counties.nil? -%>
+        <%= render 'counties/chart_data/single_county_overview' -%>
+      <%- else -%>
+        <%= render 'counties/chart_data/multiple_county_overview' -%>
+      <%- end -%>
+      sectorData = [],
+      breakoutData = [],
+      i,
+      j,
+      dataLen = data.length,
+      drillDataLen,
+      brightness;
+
+    // Build the data arrays
+    for (i = 0; i < dataLen; i += 1) {
+
+      // add sector data
+      sectorData.push({name: categories[i], y: data[i].y, color: data[i].color});
+
+      // add breakout data
+      drillDataLen = data[i].drilldown.data.length;
+      for (j = 0; j < drillDataLen; j += 1) {
+        brightness = 0.2 - (j / drillDataLen) / 3;
+        breakoutData.push({
+          name: data[i].drilldown.categories[j],
+          y: data[i].drilldown.data[j],
+          color: Highcharts.Color(data[i].color).brighten(brightness).get()
+        });
+      }
+    }
+
+    function round(number, precision) {
+      var shift = function (number, precision, reverseShift) {
+        if (reverseShift) {
+          precision = -precision;
+        }
+        var numArray = ("" + number).split("e");
+        return + (numArray[0] + "e" + (
+          numArray[1]
+            ? (+numArray[1] + precision)
+            : precision
+        ));
+      };
+      return shift(Math.round(shift(number, precision, false)), precision, true);
+    }
+
+
+    // Create the chart
+    Highcharts.chart('combined-overview-pie-chart', {
+      chart: {
+        type: 'pie'
+      },
+      credits: {
+        enabled: false
+      },
+      title: {
+        text: 'Annual Ag Production Energy Cost'
+      },
+      plotOptions: {
+        pie: {
+          shadow: false //,
+          // center: ['50%', '50%']
+        }
+      },
+      tooltip: {
+        // headerFormat: '<span style="font-size:11px">{point.key}</span><br>',
+        // pointFormat: '<b>${point.y:,.0f}</b> ({point.percentage:,.0f}%)',
+        // using formatter rather than headerFormat and pointFormat adds the ability to round to nearest 10_000
+        formatter: function () {
+          return '<span style="font-size:11px">' + this.point.name + '</span><br>' + '<b>$' + Highcharts.numberFormat(round(this.point.y,-4),0) + '</b> (' + round(this.point.percentage,0) + '%)';
+        },
+        style: {
+          textTransform: 'capitalize'
+        }
+      },
+      series: [
+        {
+          name: 'Overview',
+          data: sectorData,
+          size: '100%',
+          dataLabels: {
+            enabled: true,
+            color: 'ff00cc',
+            // format: '{point.name}: ${point.y:,.0f} ({point.percentage:,.0f}%)',
+            formatter: function () {
+              return this.point.name + ': $' + Highcharts.numberFormat(round(this.point.y,-4),0) + ' (' + round(this.point.percentage,0) + '%)';
+            },
+            distance: 10,
+            style: {
+              width: '125px',
+              fontSize: '12px'
+            }
+          },
+          id: 'overview'
+        }, {
+          name: 'Breakout',
+          data: breakoutData,
+          size: '100%',
+          innerSize: '33%',
+          dataLabels: {
+            formatter: function () {
+              // display only if larger than 1
+              return this.percentage > 2
+                ? this.point.name
+                // + Highcharts.numberFormat(this.percentage, 0, ',') + '%'
+                : null;
+            },
+            distance: -30
+          },
+          id: 'breakout'
+        }
+      ],
+      responsive: {
+        rules: [
+          {
+            condition: {
+              maxWidth: 300
+            },
+            chartOptions: {
+              series: [
+                {
+                  id: 'overview',
+                  dataLabels: {
+                    enabled: true,
+                    format: '{point.name}',
+                    distance: -60
+
+                  }
+                }, {
+                  id: 'breakout',
+                  dataLabels: {
+                    enabled: false
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    });
+  </script>
+</div>

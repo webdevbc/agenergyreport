@@ -1,0 +1,34 @@
+<!-- STEPS FOR FIELD OPERATIONS -->
+<table class='table table-sm table-bordered mb-0'>
+  <thead class="thead-light">
+    <tr>
+      <th></th>
+      <th>Energy Use</th>
+      <th>Data Source</th>
+      <th>Notes</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <% operation.categories.each do |category| %>
+  <% if operation.steps.where(category: category).size > 0 %>
+      <thead class="thead-light">
+        <tr>
+          <th colspan='4'><%= Step.titleize_category(category) %>
+          </th>
+          <th><%= number_to_currency(operation.send("cached_#{category}_dollars_per_inventory_unit".to_sym)) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% operation.steps.where(category: category).each do |step| %>
+          <tr>
+            <td><%= step.name %></td>
+            <td><small><%= "#{round_energy_unit_value(step.energy_unit, step.energy_units_used)} #{step.energy_unit.unit_short} #{step.energy_unit.name.downcase}" %></small></td>
+            <td><small><%= source_content(step)%></small></td>
+            <td><small><%= step.notes %></small></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  <% end %>
+</table>

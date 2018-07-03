@@ -1,0 +1,3 @@
+class CropStep < Step
+  
+end

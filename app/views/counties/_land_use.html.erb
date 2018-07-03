@@ -1,0 +1,58 @@
+<table class="table table-hover table-sm" id='summary'>
+	<thead class="thead-dark">
+		<tr>
+			<th>Category</th>
+			<th>Acres</th>
+			<th>Year</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class='table-total' style="font-weight:bold;">
+			<td>
+				<strong>Total Land Area</strong>
+			</td>
+			<td><%= @county.land_area_acres %></td>
+			<td><%= @county.land_area_acres_year %></td>
+		</tr>
+		<tr>
+			<td>-
+				<strong>Ag Land</strong>
+			</td>
+			<td><%= number_with_delimiter(@county.agland_acres) %></td>
+			<td><%= @county.cropland_acres_year %></td>
+		</tr>
+		<tr>
+			<td>---
+				<strong>Cropland
+					<em>(Cropland Harvested)</em>
+				</strong>
+			</td>
+			<td><%= @county.cropland_acres %>
+				<em>(<%= @county.cropland_harvested_acres %>)</em>
+			</td>
+			<td><%= @county.cropland_acres_year %></td>
+		</tr>
+		<tr>
+			<td>---
+				<strong>Pastureland</strong>
+			</td>
+			<td><%= @county.pastureland_acres %></td>
+			<td><%= @county.cropland_acres_year %></td>
+		</tr>
+		<tr>
+			<td>---
+				<strong>Woodland</strong>
+			</td>
+			<td><%= @county.woodland_acres %></td>
+			<td><%= @county.cropland_acres_year %></td>
+		</tr>
+		<tr>
+			<td>---
+				<strong>Other Ag Land</strong>
+			</td>
+			<td><%= @county.other_agland_acres %></td>
+			<td><%= @county.cropland_acres_year %></td>
+		</tr>
+
+	</tbody>
+</table>

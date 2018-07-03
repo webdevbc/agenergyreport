@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<ul>
+<%- EnergyUnit.all.each do |u| -%>
+  <li><%= u.name %>: <%= @operation.energy_units_per_inventory_unit_for(u) %> </li>
+<% end %>
+</ul>
+
+<%= render partial: @operation %>

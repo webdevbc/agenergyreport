@@ -1,0 +1,44 @@
+<div class="dashhead mt-4">
+  <div class="dashhead-titles">
+    <h6 class="dashhead-subtitle">Documentation</h6>
+    <h2 class="dashhead-title">Livestock Assumptions</h2>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col">
+
+    <ul class="nav nav-tabs" role="tablist">
+      <% LivestockOperation.group(:name).select(:name).each_with_index do |group, i| %>
+        <li class="nav-item" role="presentation">
+          <a href="#<%= group.name.parameterize %>" class="nav-link <%= if i == 0 then 'active' end %>" role="tab" data-toggle="tab" aria-controls="<%= group.name.parameterize %>"><%= group.name.titleize %></a>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content mt-4">
+      <% LivestockOperation.group(:name).select(:name).each_with_index do |group, i| %>
+        <div role="tabpanel" class="tab-pane <%= if i == 0 then 'active' end %>" id="<%= group.name %>">
+          <% LivestockOperation.where(name: group.name).includes(:steps).each do |operation| %>
+            <h4><%= description_plus_tillage_practice(operation) %></h4>
+            <p>
+              <strong>Energy use per
+                <%= operation.unit %></strong>:
+              <% array = Array.new %>
+                <% EnergyUnit.find_each do |e| %>
+                  <% if operation.energy_units_per_inventory_unit_for(e) > 0 %>
+                    <% array.push "#{pluralize(operation.energy_units_per_inventory_unit_for(e), e.unit.downcase)} of #{e.name.downcase}" %><% end %>
+                  <% end %>
+                  <%= array.to_sentence %>
+                  <br /><strong>Energy cost per <%= operation.unit %></strong>: <%= number_to_currency(operation.cached_energy_dollars_per_inventory_unit) %></p>
+
+
+                <%= render partial: "#{operation.type.underscore}s/#{operation.type.underscore}", locals: { operation: operation } %>
+
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>

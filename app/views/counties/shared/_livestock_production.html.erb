@@ -1,0 +1,84 @@
+<h3 class='mt-5 mb-3'>Livestock Production ($<%= number_to_human( @multiple ? @livestock_energy_dollars.values.sum : @livestock_energy_dollars) %>)</h3>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a href="#livestock-summary" class="nav-link active" role="tab" data-toggle="tab" aria-controls="livestock-summary">Livestock Summary</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a href="#livestock-assumptions" class="nav-link" role="tab" data-toggle="tab" aria-controls="livestock-assumptions">Assumptions</a>
+  </li>
+</ul>
+<!-- <hr class="mt-0 mb-5"> -->
+
+<div class="tab-content mt-5">
+  <div role="tabpanel" class="tab-pane active" id="livestock-summary">
+    <div class="row text-center m-t-md">
+      <div class="col-md-6 mb-5">
+        <div class="mx-auto">
+          <%= column_chart((@multiple ? @combined_head.sort : @head.sort), colors: ["#FF9655"], library: { yAxis: { min: 0, title: { text: 'Head' } }, tooltip: { pointFormat: '<b>{point.y:,.0f}</b> head' }, plotOptions: { series: { allowPointSelect: true }, pie: { dataLabels: { enabled: false }
+          } } }) %>
+        </div>
+        <h4>Livestock Inventories</h4>
+        <% unless @multiple %>
+        <a
+          tabindex="0"
+          role="button"
+          data-trigger="focus"
+          class="btn btn-secondary"
+          data-toggle="popover"
+          data-placement="bottom"
+          data-html="true"
+          data-content='The <%= link_to "USDA Ag Census/NASS Survey data for #{ @county.title }", county_statistics_path(@county) %> estimate livestock populations at a given point in time.<br /><%= latest_livestock_stats_list(@county) %>'>
+          <span class="icon icon-database"></span>
+          About the Data</a>
+          <% end #unless @multiple  %>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="mx-auto">
+          <%= column_chart((@multiple ? @livestock_energy_dollars.sort : @livestock_energy_dollars_hash.sort), colors: ["#FF9655"], library: { yAxis: { min: 0, title: { text: 'Dollars' } }, tooltip: { pointFormat: '<b>${point.y:,.0f}</b><br/>' }, plotOptions: { series: { allowPointSelect: true } } }) %>
+        </div>
+        <h4>Annual Energy Cost</h4>
+        <%# @livestock_energy_dollars_per_unit_hash %>
+          <a
+            tabindex="0"
+            role="button"
+            data-trigger="focus"
+            class="btn btn-secondary"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            data-content='<h6>Energy Cost =</h6> # of Head &times; <span class="text-success"><strong>Energy Cost/head</strong></span><br><br>
+                       <strong class="text-success">Energy Cost/head </strong><strong>=</strong><br>( Electricity use + Heating Oil use + Diesel use ) &times; <br><%= link_to "Cost of Fuel", energy_units_path %>
+
+          '>
+            <span class="icon icon-calculator"></span>
+            About the Math</a>
+
+        </div>
+      </div>
+      <!-- close row -->
+    </div>
+    <!-- close inner tabpanel -->
+
+    <div role="tabpanel" class="tab-pane" id="livestock-assumptions">
+      <div class="row">
+        <div class="col-lg-4 mb-5">
+          <h5 class='mb-2'>Energy use per Head</h5>
+          <p><%= link_to "Electricity, Heating, and Diesel Costs per Head", livestock_assumptions_path %></p>
+          <!-- <p><strong>Data source:</strong></p> -->
+
+          <h5 class='mb-2'>USDA/NASS Data</h5>
+          <% if @multiple %>
+          <%= "Statistics from #{ @selected_counties.count} counties" %>. <%= link_to "(e.g., #{ @selected_counties.first.title })", county_statistics_path(@selected_counties.first) %>
+          <% else %>
+          <%= link_to "All Statistics for #{ @county.title }", county_statistics_path(@county) %>
+          <% end %>
+          <p>
+            <strong>Data source:</strong>
+            USDA Ag Census, NASS Survey</p>
+        </div>
+      </div>
+      <!-- close row -->
+    </div>
+    <!-- close inner tabpanel -->
+  </div>
+  <!-- close inner tabcontent -->

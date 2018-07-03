@@ -1,0 +1,56 @@
+<div class="hr-divider mt-2 mb-3">
+  <h3 class="hr-divider-content hr-divider-heading">
+    <%= @multiple ? "Multiple County Totals" : "Quick Stats" %>
+  </h3>
+</div>
+
+<div class="row statcards">
+  <div class="col-sm-8 mb-5 mb-md-3">
+    <div class="statcard statcard-primary mb-3">
+      <div class="p-3">
+        <span class="statcard-desc">Annual Ag Production Energy Cost</span>
+        <h2 class="statcard-number">
+          $<%= number_to_human( @multiple ? @combined_energy_dollars.values.sum : @combined_energy_dollars ) %>
+        </h2>
+      </div>
+    </div>
+    <%= render 'combined_overview_pie_chart' %>
+  </div>
+  <div class="col-sm-4 mb-5 mb-md-3">
+    <div class="statcard mb-3">
+      <div class="p-3">
+        <span class="statcard-desc">Annual Energy Use (MMBtu)</span>
+        <h2 class="statcard-number">
+          <%= number_to_human( @multiple ? @combined_mmbtus.values.sum : @combined_mmbtus ) %>
+        </h2>
+      </div>
+    </div>
+    <div class="statcard mb-3">
+      <div class="p-3">
+        <span class="statcard-desc">Annual CO<sub>2</sub>E Emissions (metric tons)</span>
+        <h2 class="statcard-number">
+          <%= display_emission_value( @multiple ? @combined_co2e_emissions.values.sum/1000 : @combined_co2e_emissions/1000 ) %>
+        </h2>
+      </div>
+    </div>
+
+    <div class="statcard mb-3">
+      <div class="p-3">
+        <span class="statcard-desc">Land Area (acres)</span>
+        <h2 class="statcard-number">
+          <%= number_with_delimiter(@multiple ? @selected_counties.sum(&:land_area_acres) : @county.land_area_acres) %>
+        </h2>
+      </div>
+    </div>
+
+    <div class="statcard mb-3">
+      <div class="p-3">
+        <span class="statcard-desc">Farm Operations (<%= @multiple ? @selected_counties.first.total_farm_operations_count_year : @county.total_farm_operations_count_year %>
+          Ag Census)</span>
+        <h2 class="statcard-number">
+          <%= number_with_delimiter(@multiple ? @selected_counties.sum(&:total_farm_operations_count) : @county.total_farm_operations_count) %>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>

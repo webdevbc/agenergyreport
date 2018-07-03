@@ -1,0 +1,38 @@
+<div class="hr-divider mt-2 mb-3">
+  <h3 class="hr-divider-content hr-divider-heading">Quick Stats by County</h3>
+</div>
+
+  <table class="table table-sm" id='summary'>
+    <thead class="thead-light">
+      <tr>
+        <th></th>
+        <th>Annual Ag Production Energy Cost</th>
+        <th>Annual Energy Use <small>(MMBtu)</small></th>
+        <th>Annual CO<sub>2</sub>e<small> (Metric Tons)</small></th>
+        <th>Total Land Area<small> (acres)</small></th>
+        <th>Farm Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class='table-total' style="font-weight:bold;">
+        <td>Total</td>
+        <td>$<%= number_to_human @combined_energy_dollars.values.sum %></td>
+        <td><%= number_with_delimiter ( @combined_mmbtus.values.sum.round ) %></td>
+        <td><%= display_emission_value( @combined_co2e_emissions.values.sum/1000 ) %></td>
+        <td><%= number_with_delimiter(@selected_counties.sum(&:land_area_acres)) %></td>
+        <td><%= number_with_delimiter(@selected_counties.sum(&:total_farm_operations_count)) %></td>
+      </tr>
+
+      <% @selected_counties.each do |county| %>
+        <tr>
+          <td><%= link_to(county.title, county_path(county)) %></td>
+          <td>$<%= number_to_human @combined_energy_dollars[county.id] %></td>
+          <td><%= number_with_delimiter ( @combined_mmbtus[county.id].round ) %></td>
+          <td><%= display_emission_value( @combined_co2e_emissions[county.id]/1000 ) %></td>
+          <td><%= number_with_delimiter(county.land_area_acres) %></td>
+          <td><%= number_with_delimiter(county.total_farm_operations_count) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

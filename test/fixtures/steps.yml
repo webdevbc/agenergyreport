@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  slug: MyString
+  name: MyString
+  cost: 9.99
+  energy_unit: one
+  energy_units_used: 9.99
+  category: MyString
+  subcategory: MyString
+  source_text: MyString
+  source_url: MyString
+  notes: MyString
+
+two:
+  type: 
+  slug: MyString
+  name: MyString
+  cost: 9.99
+  energy_unit: two
+  energy_units_used: 9.99
+  category: MyString
+  subcategory: MyString
+  source_text: MyString
+  source_url: MyString
+  notes: MyString

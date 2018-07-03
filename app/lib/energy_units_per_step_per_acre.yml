@@ -1,0 +1,938 @@
+# do not use hyphens
+corn:
+  fertilizer_n:
+    intensive_tillage:
+      following_corn:
+        - step: &nitrogen_corn_following_corn
+            slug: 'nitrogen_corn_following_corn'
+            name: 'Nitrogen Fertilizer, Corn following Corn'
+            energy_units_used: 186
+            category: fertilizer
+            subcategory:
+            source_text: ISU Extension Publication A1-20
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+            notes: 165 bu. per acre harvest
+            sort_order: 330
+      following_soybeans:
+        - step: &nitrogen_corn_following_soybeans
+            slug: 'nitrogen_corn_following_soybeans'
+            name: 'Nitrogen Fertilizer, Corn following Soybeans'
+            energy_units_used: 131
+            category: fertilizer
+            subcategory:
+            source_text: ISU Extension Publication A1-20
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+            notes: 180 bu. per acre harvest
+            sort_order: 331
+    reduced_tillage:
+      following_corn:
+        - step: *nitrogen_corn_following_corn
+      following_soybeans:
+        - step: *nitrogen_corn_following_soybeans
+    no_tillage:
+      following_corn:
+        - step: *nitrogen_corn_following_corn
+      following_soybeans:
+        - step: *nitrogen_corn_following_soybeans
+  fertilizer_p:
+    intensive_tillage:
+      following_corn:
+        - step: &phosphorous_corn_following_corn
+            slug: 'phosphorous_corn_following_corn'
+            name: 'Phosphorus Fertilizer, Corn following Corn'
+            energy_units_used: 62
+            category: fertilizer
+            subcategory:
+            source_text: ISU Extension Publication A1-20
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+            notes: 165 bu. per acre harvest
+            sort_order: 340
+      following_soybeans:
+        - step: &phosphorous_corn_folowing_soybeans
+            slug: 'phosphorous_corn_folowing_soybeans'
+            name: 'Phosphorus Fertilizer, Corn following Soybeans'
+            energy_units_used: 68
+            category: fertilizer
+            subcategory:
+            source_text: ISU Extension Publication A1-20
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+            notes: 180 bu. per acre harvest
+            sort_order: 341
+    reduced_tillage:
+      following_corn:
+        - step: *phosphorous_corn_following_corn
+      following_soybeans:
+        - step: *phosphorous_corn_folowing_soybeans
+    no_tillage:
+      following_corn:
+        - step: *phosphorous_corn_following_corn
+      following_soybeans:
+        - step: *phosphorous_corn_folowing_soybeans
+  fertilizer_k:
+    intensive_tillage:
+      following_corn:
+        - step: &potash_corn_following_corn
+            slug: 'potash_corn_following_corn'
+            name: 'Potash Fertilizer, Corn following Corn'
+            energy_units_used: 50
+            category: fertilizer
+            subcategory:
+            source_text: ISU Extension Publication A1-20
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+            notes: 165 bu. per acre harvest
+            sort_order: 350
+      following_soybeans:
+        - step: &potash_corn_following_soybeans
+            slug: 'potash_corn_following_soybeans'
+            name: 'Potash Fertilizer, Corn following Soybeans'
+            energy_units_used: 54
+            category: fertilizer
+            subcategory:
+            source_text: ISU Extension Publication A1-20
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+            notes: 180 bu. per acre harvest
+            sort_order: 351
+    reduced_tillage:
+      following_corn:
+        - step: *potash_corn_following_corn
+      following_soybeans:
+        - step: *potash_corn_following_soybeans
+    no_tillage:
+      following_corn:
+        - step: *potash_corn_following_corn
+      following_soybeans:
+        - step: *potash_corn_following_soybeans
+  diesel:
+    intensive_tillage:
+      following_corn:
+        - step: &moldboard
+            slug: 'moldboard'
+            name: Moldboard Plow
+            energy_units_used: 0.35
+            category: field
+            subcategory: tillage
+            source_text: # ISU Extension Publication A3-27
+            source_url: # https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            notes: 'Why is this not 1.7?'
+            sort_order: 110
+        - step: &subsoilerchisel
+            slug: 'subsoilerchisel'
+            name: 'Subsoiler or Chiselplow'
+            energy_units_used: 1.40
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            notes: Average of Subsoiler/Ripper (1.1 gal/ac) and Chiselplow (1.7 gal/ac)
+            sort_order: 120
+        - step: &diskchisel
+            slug: 'diskchisel'
+            name: 'Disk-chisel Plow'
+            energy_units_used: 1.30
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 130
+        - step: &offsetdisk
+            slug: 'offsetdisk'
+            name: 'Offset Disk'
+            energy_units_used: 0.85
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 140
+        - step: &tandemdisk1
+            slug: 'tandemdisk1'
+            name: 'Tandem Disk, 1st'
+            energy_units_used: 0.65
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 150
+        - step: &tandemdisk2
+            slug: 'tandemdisk2'
+            name: 'Tandem Disk, 2nd'
+            energy_units_used: 0.55
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 151
+        - step: &tandemdisk3
+            slug: 'tandemdisk3'
+            name: 'Tandem Disk, 3rd'
+            energy_units_used: 0.45
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 152
+        - step: &fieldcultivate1
+            slug: 'fieldcultivate1'
+            name: 'Field Cultivate, 1st'
+            energy_units_used: 0.70
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 210
+        - step: &fieldcultivate2
+            slug: 'fieldcultivate2'
+            name: 'Field Cultivate, 2nd'
+            energy_units_used: 0.65
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 211
+        - step: &spreader
+            slug: 'spreader'
+            name: 'Spreader'
+            energy_units_used: 0.15
+            category: field # could be fertilizer
+            subcategory: fertilizer
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 310
+        - step: &anhydrousapplication
+            slug: 'anhydrousapplication'
+            name: 'Anhydrous Application'
+            energy_units_used: 0.55
+            category: field # could be fertilizer
+            subcategory: fertilizer
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 315
+        - step: &tillplanter
+            slug: 'tillplanter'
+            name: 'Till Planter'
+            energy_units_used: 0.55
+            category: field
+            subcategory: planting
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 410
+        - step: &weedcontrol
+            slug: 'weedcontrol'
+            name: 'Weed Control'
+            energy_units_used: 0.35
+            category: field
+            subcategory: planting
+            source_text:
+            source_url:
+            sort_order: 450
+        - step: &combinecorn
+            slug: 'combinecorn'
+            name: 'Combine, corn'
+            energy_units_used: 1.45
+            category: field
+            subcategory: harvest
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 510
+        - step: &haulcorngrain
+            slug: 'haulcorngrain'
+            name: 'Haul (field w/ .5 mi. gravel)'
+            energy_units_used: 0.2
+            category: field
+            subcategory: harvest
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 610
+        - step: &haulcorngrain10
+            slug: 'haulcorngrain10'
+            name: 'Haul (+ 10 mi. gravel)'
+            energy_units_used: 1.5
+            category: field
+            subcategory: harvest
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 620
+      following_soybeans: # 54.68
+        - step: *moldboard
+        - step: *subsoilerchisel
+        - step: *diskchisel
+        - step: *offsetdisk
+        - step: *tandemdisk1
+        - step: *tandemdisk2
+        - step: *tandemdisk3
+        - step: *fieldcultivate1
+        - step: *fieldcultivate2
+        - step: *spreader
+        - step: *anhydrousapplication
+        - step: *tillplanter
+        - step: *weedcontrol
+        - step: *combinecorn
+        - step: *haulcorngrain
+        - step: *haulcorngrain10
+    reduced_tillage:
+      following_corn: # 55.46
+        - step: &striptill
+            slug: 'striptill'
+            name: 'Strip Till Plow'
+            energy_units_used: 1.10
+            category: field
+            subcategory: tillage
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 135
+        - step: *tandemdisk1
+        - step: *fieldcultivate1
+        - step: *spreader
+        - step: *anhydrousapplication
+        - step: *tillplanter
+        - step: *weedcontrol
+        - step: *combinecorn
+        - step: *haulcorngrain
+        - step: *haulcorngrain10
+      following_soybeans: # 50.23
+        - step: *striptill
+        - step: *tandemdisk1
+        - step: *fieldcultivate1
+        - step: *spreader
+        - step: *anhydrousapplication
+        - step: *tillplanter
+        - step: *weedcontrol
+        - step: *combinecorn
+        - step: *haulcorngrain
+        - step: *haulcorngrain10
+    no_tillage:
+      following_corn: # 52.36
+        - step: *spreader
+        - step: &notillplanter
+            slug: 'notillplanter'
+            name: 'No-Till Planter'
+            energy_units_used: 0.45
+            category: field
+            subcategory: planting
+            source_text: ISU Extension Publication A3-27
+            source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+            sort_order: 420
+        - step: *weedcontrol
+        - step: *combinecorn
+        - step: *haulcorngrain
+        - step: *haulcorngrain10
+      following_soybeans: # 47.13
+        - step: *spreader
+        - step: *notillplanter
+        - step: *weedcontrol
+        - step: *combinecorn
+        - step: *haulcorngrain
+        - step: *haulcorngrain10
+  propane:
+    - step: &dryer_propane_corn
+        slug: 'dryer_propane_corn'
+        name: 'Grain Dryer (Propane)'
+        energy_units_used: 9.6
+        category: drying
+        subcategory:
+        source_text:
+        source_url:
+        sort_order: 710
+        notes:
+  electricity:
+    - step: &dryer_electricity_corn
+        slug: 'dryer_electricity_corn'
+        name: 'Grain Dryer (Electricity)'
+        energy_units_used: 35.6
+        category: drying
+        subcategory:
+        source_text:
+        source_url:
+        notes:
+        sort_order: 750
+corn silage:
+  fertilizer_n:
+    intensive_tillage:
+      - step: &nitrogen_corn_silage_following_corn
+          slug: 'nitrogen_corn_silage_following_corn'
+          name: 'Nitrogen Fertilizer, Corn Silage following Corn'
+          energy_units_used: 150
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: 24 tons per acre harvest
+          sort_order: 332
+    reduced_tillage:
+      - step: *nitrogen_corn_silage_following_corn
+    no_tillage:
+      - step: *nitrogen_corn_silage_following_corn
+  fertilizer_p:
+    intensive_tillage:
+      - step: &phosphorous_corn_silage_following_corn
+          slug: 'phosphorous_corn_silage_following_corn'
+          name: 'Phosphorous Fertilizer, Corn Silage following Corn'
+          energy_units_used: 84
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: 24 tons per acre harvest
+          sort_order: 342
+    reduced_tillage:
+      - step: *phosphorous_corn_silage_following_corn
+    no_tillage:
+      - step: *phosphorous_corn_silage_following_corn
+  fertilizer_k:
+    intensive_tillage:
+      - step: &potash_corn_silage_following_corn
+          slug: 'potash_corn_silage_following_corn'
+          name: 'Potash Fertilizer, Corn Silage following Corn'
+          energy_units_used: 192
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: 24 tons per acre harvest
+          sort_order: 352
+    reduced_tillage:
+      - step: *potash_corn_silage_following_corn
+    no_tillage:
+      - step: *potash_corn_silage_following_corn
+  diesel:
+    intensive_tillage:
+      - step: *moldboard
+      - step: *subsoilerchisel
+      - step: *diskchisel
+      - step: *offsetdisk
+      - step: *tandemdisk1
+      - step: *tandemdisk2
+      - step: *tandemdisk3
+      - step: *fieldcultivate1
+      - step: *fieldcultivate2
+      - step: *spreader
+      - step: *anhydrousapplication
+      - step: *tillplanter
+      - step: *weedcontrol
+      - step: &cornsilageharvester
+          slug: 'cornsilageharvester'
+          name: "Corn Silage Harvester"
+          energy_units_used: 3.25
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 520
+      - step: &cornsilageblower
+          slug: 'cornsilageblower'
+          name: "Corn Silage Blower"
+          energy_units_used: 1.25
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 525
+      - step: &haulcornsilage
+          slug: 'haulcornsilage'
+          name: 'Haul Corn Silage (field w/ .5 mi. gravel)'
+          energy_units_used: 1.25
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 612
+      - step: &haulcornsilage10
+          slug: 'haulcornsilage10'
+          name: 'Haul Corn Silage (+ 10 mi. gravel)'
+          energy_units_used: 8
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          notes: "Avg. distance may be less than 10 mi assumed"
+          sort_order: 652
+    reduced_tillage:
+      - step: *striptill
+      - step: *tandemdisk1
+      - step: *fieldcultivate1
+      - step: *spreader
+      - step: *anhydrousapplication
+      - step: *tillplanter
+      - step: *weedcontrol
+      - step: *cornsilageharvester
+      - step: *cornsilageblower
+      - step: *haulcornsilage
+      - step: *haulcornsilage10
+    no_tillage:
+      - step: *spreader
+      - step: *notillplanter
+      - step: *weedcontrol
+      - step: *cornsilageharvester
+      - step: *cornsilageblower
+      - step: *haulcornsilage
+      - step: *haulcornsilage10
+soybeans:
+  fertilizer_p:
+    intensive_tillage:
+      - step: &phosphorous_soybeans_following_corn
+          slug: 'phosphorous_soybeans_following_corn'
+          name: 'Phosphorous Fertilizer, Soybeans following Corn'
+          energy_units_used: 40
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: 50 bu. per acre harvest
+          sort_order: 343
+    reduced_tillage:
+      - step: *phosphorous_soybeans_following_corn
+    no_tillage:
+      - step: *phosphorous_soybeans_following_corn
+  fertilizer_k:
+    intensive_tillage:
+      - step: &potash_soybeans_following_corn
+          slug: 'potash_soybeans_following_corn'
+          name: 'Potash Fertilizer, Soybeans following Corn'
+          energy_units_used: 75
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: 50 bu. per acre harvest
+          sort_order: 353
+    reduced_tillage:
+      - step: *potash_soybeans_following_corn
+    no_tillage:
+      - step: *potash_soybeans_following_corn
+  diesel:
+    intensive_tillage: #13.39
+      - step: *moldboard
+      - step: *subsoilerchisel
+      - step: *diskchisel
+      - step: *offsetdisk
+      - step: *tandemdisk1
+      - step: *tandemdisk2
+      - step: *tandemdisk3
+      - step: *fieldcultivate1
+      - step: *fieldcultivate2
+      - step: *spreader
+      - step: *anhydrousapplication
+      - step: &graindrillplanter
+          slug: 'graindrillplanter'
+          name: 'Grain Drill Planter'
+          energy_units_used: 0.30
+          category: field
+          subcategory: planting
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 430
+      - step: *weedcontrol
+      - step: &combinesoybeans
+          slug: 'combinesoybeans'
+          name: "Combine, soybeans"
+          energy_units_used: 1.00
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 514
+      - step: &haulsoybeans
+          slug: 'haulsoybeans'
+          name: 'Haul (field w/ .5 mi. gravel)'
+          energy_units_used: 0.08
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 614
+      - step: &haulsoybeans10
+          slug: 'haulsoybeans10'
+          name: 'Haul (+ 10 mi. gravel)'
+          energy_units_used: 0.5
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          notes: "Avg. distance may be less than 10 mi assumed"
+          sort_order: 654
+    reduced_tillage: #8.94
+      - step: *striptill
+      - step: *tandemdisk1
+      - step: *fieldcultivate1
+      - step: *spreader
+      - step: *anhydrousapplication
+      - step: *graindrillplanter
+      - step: *weedcontrol
+      - step: *combinesoybeans
+      - step: *haulsoybeans
+      - step: *haulsoybeans10
+    no_tillage: #5.941
+      - step: *spreader
+      - step: *graindrillplanter
+      - step: *weedcontrol
+      - step: *combinesoybeans
+      - step: *haulsoybeans
+      - step: *haulsoybeans10
+  propane:
+    - step: &dryer_propane
+        slug: 'dryer_propane'
+        name: 'Dryer (Propane)'
+        energy_units_used: 0.75
+        category: drying
+        subcategory:
+        source_text:
+        source_url:
+        notes:
+        sort_order: 720
+  electricity:
+    - step: &dryer_electricity
+        slug: 'dryer_electricity'
+        name: 'Dryer (Electricity)'
+        energy_units_used: 27.5
+        category: drying
+        subcategory:
+        source_text:
+        source_url:
+        notes:
+        sort_order: 760
+
+# Estimated 1 seeded acre utilized for 3 years   ***Estimated 1 cutting forage, 3 cuttings hay, 1 cutting haylage per acre/per year
+# Annual fertilizer
+forage:
+  fertilizer_p:
+    intensive_tillage:
+      - step: &phosphorous_alfalfa
+          slug: 'phosphorous_alfalfa'
+          name: 'Phosphorous Fertilizer, Alfalfa'
+          energy_units_used: 35
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: Assumes two and a half tons per acre from two alfalfa cuttings
+          sort_order: 345
+    reduced_tillage:
+      - step: *phosphorous_alfalfa
+    no_tillage:
+      - step: *phosphorous_alfalfa
+  fertilizer_k:
+    intensive_tillage:
+      - step: &potash_alfalfa
+          slug: 'potash_alfalfa'
+          name: 'Potash Fertilizer, Alfalfa'
+          energy_units_used: 125
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: Assumes two and a half tons per acre from two alfalfa cuttings.
+          sort_order: 355
+    reduced_tillage:
+      - step: *potash_alfalfa
+    no_tillage:
+      - step: *potash_alfalfa
+  diesel:
+    intensive_tillage: #20.48
+      - step: &preharvestmachinery_everythirdyear
+          slug: 'preharvestmachinery_everythirdyear'
+          name: "Pre Harvest Machinery"
+          category: field
+          subcategory: preharvest
+          energy_units_used: 1.2167
+          notes: "Not clear what Pre Harvest Machinery involves... Listed as 3.65/3. "
+          sort_order: 063
+      - step: &subsoilerchisel_everythirdyear
+          slug: 'subsoilerchisel_everythirdyear'
+          name: 'Subsoiler or Chiselplow'
+          energy_units_used: 0.466
+          category: field
+          subcategory: tillage
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          notes: Average of Subsoiler/Ripper (1.1 gal/ac) and Chiselplow (1.7 gal/ac) operated every third year.
+          sort_order: 123
+      - step: &diskchisel_everythirdyear
+          slug: 'diskchisel_everythirdyear'
+          name: 'Disk-chisel Plow'
+          energy_units_used: 0.433
+          category: field
+          subcategory: tillage
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 133
+      - step: &offsetdisk_everythirdyear
+          slug: 'offsetdisk_everythirdyear'
+          name: 'Offset Disk'
+          energy_units_used: 0.2833
+          category: field
+          subcategory: tillage
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 143
+      - step: &tandemdisk_everythirdyear
+          slug: 'tandemdisk_everythirdyear'
+          name: 'Tandem Disk'
+          energy_units_used: 0.2167
+          category: field
+          subcategory: tillage
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 153
+      - step: &fieldcultivate_everythirdyear
+          slug: 'fieldcultivate_everythirdyear'
+          name: 'Field Cultivate'
+          energy_units_used: 0.2333
+          category: field
+          subcategory: tillage
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 213
+      - step: &spreader_everythirdyear
+          slug: 'spreader_everythirdyear'
+          name: 'Spreader'
+          energy_units_used: 0.05
+          category: field # could be fertilizer
+          subcategory: fertilizer
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 313
+      - step: &airdrill_everythirdyear
+          slug: 'airdrill_everythirdyear'
+          name: 'Air Drill'
+          energy_units_used: 0.2333
+          category: field
+          subcategory: planting
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 440
+      - step: &greenforageharvester
+          slug: 'greenforageharvester'
+          name: "Green Forage Harvester"
+          energy_units_used: 0.85
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 530
+      - step: &greenforageblower
+          slug: 'greenforageblower'
+          name: "Green Forage Blower"
+          energy_units_used: 0.30
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 535
+      - step: &haulgreenforage
+          slug: 'haulgreenforage'
+          name: 'Haul Green Forage (field w/ .5 mi. gravel)'
+          energy_units_used: 0.30
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 616
+      - step: &haulgreenforage10
+          slug: 'haulgreenforage10'
+          name: 'Haul Green Forage (+ 10 mi. gravel)'
+          energy_units_used: 1.5
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          notes: "Avg. distance may be less than 10 mi assumed"
+          sort_order: 656
+      - step: &mower_3x
+          slug: 'mower_3x'
+          name: "Mower"
+          energy_units_used: 0.9 # 0.3 * 3
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 670
+      - step: &rake_3x
+          slug: 'rake_3x'
+          name: "Rake"
+          energy_units_used: 0.75 # 0.25 * 3
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 672
+      - step: &selfpropelledwindrower_3x
+          slug: 'selfpropelledwindrower_3x'
+          name: "Self-Propelled Windrower"
+          energy_units_used: 1.35 # 0.45 * 3
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 674
+      - step: &smallsquarebaler_3x
+          slug: 'smallsquarebaler_3x'
+          name: "Small Square Baler"
+          energy_units_used: 1.2 # 0.4 * 3
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 676
+      - step: &haylageharvester
+          slug: 'haylageharvester'
+          name: "Haylage Harvester"
+          energy_units_used: 1.15
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 680
+      - step: &haylageblower
+          slug: 'haylageblower'
+          name: "Haylage Blower"
+          energy_units_used: 0.25
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 682
+      - step: &haulhaylage
+          slug: 'haulhaylage'
+          name: 'Haul (field w/ .5 mi. gravel)'
+          energy_units_used: 0.8 # 0.2 * 4
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 690
+      - step: &haulhaylage10
+          slug: 'haulhaylage10'
+          name: 'Haul (+ 10 mi. gravel)'
+          energy_units_used: 8 # 0.2 * 10 * 4
+          category: field
+          subcategory: harvest
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 692
+    reduced_tillage: #19.67
+      - step: *preharvestmachinery_everythirdyear
+      - step: &striptill_everythirdyear
+          slug: 'striptill_everythirdyear'
+          name: 'Strip-till Plow'
+          energy_units_used: 0.3667 # 1.1 / 3
+          category: field
+          subcategory: tillage
+          source_text: ISU Extension Publication A3-27
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a3-27.html
+          sort_order: 136
+      - step: *tandemdisk_everythirdyear
+      - step: *fieldcultivate_everythirdyear
+      - step: *spreader_everythirdyear
+      - step: *airdrill_everythirdyear
+      - step: *greenforageharvester
+      - step: *greenforageblower
+      - step: *haulgreenforage
+      - step: *haulgreenforage10
+      - step: *mower_3x
+      - step: *rake_3x
+      - step: *selfpropelledwindrower_3x
+      - step: *smallsquarebaler_3x
+      - step: *haylageharvester
+      - step: *haylageblower
+      - step: *haulhaylage
+      - step: *haulhaylage10
+    no_tillage: #18.85
+      - step: *preharvestmachinery_everythirdyear
+      - step: *spreader_everythirdyear
+      - step: *airdrill_everythirdyear
+      - step: *greenforageharvester
+      - step: *greenforageblower
+      - step: *haulgreenforage
+      - step: *haulgreenforage10
+      - step: *mower_3x
+      - step: *rake_3x
+      - step: *selfpropelledwindrower_3x
+      - step: *smallsquarebaler_3x
+      - step: *haylageharvester
+      - step: *haylageblower
+      - step: *haulhaylage
+      - step: *haulhaylage10
+oats:
+  fertilizer_n:
+    intensive_tillage:
+      - step: &nitrogen_oats
+          slug: 'nitrogen_oats'
+          name: 'Nitrogen Fertilizer, Oats'
+          energy_units_used: 60
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: Alfalfa-Grass Seeded with Oat Companion Crop.  Assumes 80 bushels oat yield, one ton straw yield, and one ton per acre alfalfa yield from one cutting.
+          sort_order: 333
+    reduced_tillage:
+      - step: *nitrogen_oats
+    no_tillage:
+      - step: *nitrogen_oats
+  fertilizer_p:
+    intensive_tillage:
+      - step: &phosphorous_oats
+          slug: 'phosphorous_oats'
+          name: 'Phosphorous Fertilizer, Oats'
+          energy_units_used: 45
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: Alfalfa-Grass Seeded with Oat Companion Crop.  Assumes 80 bushels oat yield, one ton straw yield, and one ton per acre alfalfa yield from one cutting.
+          sort_order: 344
+    reduced_tillage:
+      - step: *phosphorous_oats
+    no_tillage:
+      - step: *phosphorous_oats
+  fertilizer_k:
+    intensive_tillage:
+      - step: &potash_oats
+          slug: 'potash_oats'
+          name: 'Potash Fertilizer, Oats'
+          energy_units_used: 130
+          category: fertilizer
+          subcategory:
+          source_text: ISU Extension Publication A1-20
+          source_url: https://www.extension.iastate.edu/agdm/crops/html/a1-20.html
+          notes: Alfalfa-Grass Seeded with Oat Companion Crop.  Assumes 80 bushels oat yield, one ton straw yield, and one ton per acre alfalfa yield from one cutting.
+          sort_order: 354
+    reduced_tillage:
+      - step: *potash_oats
+    no_tillage:
+      - step: *potash_oats
+  diesel:
+    intensive_tillage:
+      - step: *subsoilerchisel_everythirdyear
+      - step: *diskchisel_everythirdyear
+      - step: *offsetdisk_everythirdyear
+      - step: *tandemdisk_everythirdyear
+      - step: *fieldcultivate_everythirdyear
+      - step: *spreader
+      - step: *anhydrousapplication
+      - step: *graindrillplanter
+      - step: *weedcontrol
+      - step: *combinesoybeans
+      - step: *haulsoybeans
+      - step: *haulsoybeans10
+    reduced_tillage:
+      - step: *striptill_everythirdyear
+      - step: *tandemdisk_everythirdyear
+      - step: *fieldcultivate_everythirdyear
+      - step: *spreader
+      - step: *anhydrousapplication
+      - step: *graindrillplanter
+      - step: *weedcontrol
+      - step: *combinesoybeans
+      - step: *haulsoybeans
+      - step: *haulsoybeans10
+    no_tillage:
+      - step: *spreader
+      - step: *graindrillplanter
+      - step: *weedcontrol
+      - step: *combinesoybeans
+      - step: *haulsoybeans
+      - step: *haulsoybeans10
+  propane:
+    - step: *dryer_propane
+  electricity:
+    - step: *dryer_electricity
