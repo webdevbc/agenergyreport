@@ -53,7 +53,9 @@ class EnergyUnit < ApplicationRecord
   # or convert to: https://usda.mannlib.cornell.edu/usda/ams/NW_GR910.txt
   def self.get_latest_fertilizer_data
     # f = open('https://www.ams.usda.gov/mnreports/nw_gr210.txt')
-    f = open("#{Rails.root.to_s}/public/fallback_data/nw_gr210.txt")
+    # f = open("#{Rails.root.to_s}/public/fallback_data/nw_gr210.txt")
+    f = open('https://usda.mannlib.cornell.edu/usda/ams/NW_GR210.txt')
+
 
 
     publication_date = DateTime.new
