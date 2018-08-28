@@ -1,5 +1,5 @@
 NW_GR210
-Des Moines, IA    Wed, Jun 20, 2018     USDA Market News
+Des Moines, IA    Wed, Aug 15, 2018     USDA Market News
 
 Iowa Production Cost Report (Bi-weekly)
 Propane and Farm Diesel prices are current.
@@ -7,31 +7,31 @@ Production costs items state wide: cash prices bulk, FOB distributor,
 per ton unless otherwise stated. Fertilizer in granular form unless noted.
 
 Product                                    Offer        Average       Change
-Anhydrous ammonia                      455.00-525.00    497.80       DN 1.77
+Anhydrous ammonia                      455.00-525.00    481.00       UP 10.33
 
-Urea 46-0-0                            310.00-421.00    362.50       DN 0.70
+Urea 46-0-0                            325.00-360.00    343.50       DN 51.50
 
-Liquid Nitrogen 28% spread             220.00-335.00    270.00       UP 14.75
-                32% spread             240.00-255.00    249.33       UP 3.13
+Liquid Nitrogen 28% spread             213.50-335.00    256.17       DN 13.83
+                32% spread             240.00-244.00    242.00       DN 5.50
 
-Lime (Applied)                          19.00-21.00      20.00         UNCH
+Lime (Applied)                               NA           NA            NA
 
 DAP(Diammonium Phosphate 18%N 46%P)          NA           NA            NA
 
-MAP (Monoammonium Phosphate 11%N 52%P) 470.00-560.00    514.80       DN 10.20
+MAP (Monoammonium Phosphate 11%N 52%P) 480.00-560.00    519.80       DN 1.20
 
-Potash (Red) (0-0-60)                  305.00-395.00    354.60       DN 7.57
+Potash (Red) (0-0-60)                  315.00-375.00    339.00       DN 23.33
 
 Potash (White) (0-0-62)                      NA           NA            NA
 
-Propane (LP Gas) per gal <1000 gallons   1.14-1.40       1.25        DN 0.02
+Propane (LP Gas) per gal <1000 gallons   1.12-1.40       1.26        DN 0.01
 
-Farm Diesel Fuel per gal <1000 gallons   2.53-2.60       2.57        DN 0.03
+Farm Diesel Fuel per gal <1000 gallons   2.48-2.60       2.54        UP 0.06
 
 
 Source: USDA Market News Service  Des Moines, IA
         Catherine Bachman  515-284-4460  Desm.LPGMN@ams.usda.gov
-        24 Hour recorded market information 515-284-4830
-        www.ams.usda.gov/mnreports/NW_GR210.txt
-        www.ams.usda.gov/LPSMarketNewsPage
-914C                                   CB
+        24 Hour recorded market information 515-284-4830
+        www.ams.usda.gov/mnreports/NW_GR210.txt
+        www.ams.usda.gov/LPSMarketNewsPage
+1051C                                  CB
