@@ -55,7 +55,7 @@ GEM
     brakeman (4.3.1)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (3.11.0)
+    capybara (3.11.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -190,7 +190,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.19)
+    uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     web-console (3.7.0)
       actionview (>= 5.0)
@@ -232,7 +232,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.4.4p296
+   ruby 2.5.3p105
 
 BUNDLED WITH
-   1.16.6
+   1.17.1
