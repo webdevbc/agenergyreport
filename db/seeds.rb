@@ -5,7 +5,7 @@
 iowa_counties = [
   { fips: 19_001, name: 'Adair' },
   { fips: 19_003, name: 'Adams' },
-  # { fips: 19_005, name: 'Allamakee' },
+  { fips: 19_005, name: 'Allamakee' },
   # { fips: 19_007, name: 'Appanoose' },
   # { fips: 19_009, name: 'Audubon' },
   # { fips: 19_011, name: 'Benton' },
@@ -98,7 +98,7 @@ iowa_counties = [
   # { fips: 19_185, name: 'Wayne' },
   # { fips: 19_187, name: 'Webster' },
   # { fips: 19_189, name: 'Winnebago' },
-  # { fips: 19_191, name: 'Winneshiek' },
+  { fips: 19_191, name: 'Winneshiek' },
   # { fips: 19_193, name: 'Woodbury' },
   # { fips: 19_195, name: 'Worth' },
   { fips: 19_197, name: 'Wright' }
