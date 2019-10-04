@@ -12,8 +12,8 @@ Built using [Ruby on Rails](https://rubyonrails.org), [PostgreSQL](https://www.p
 ## Installation
 Steps to get the development application up and running at http://localhost:3000
 
-* Install Ruby 2.5.3 or greater
-* Install Ruby on Rails 5.2 or greater
+* Install Ruby 2.6.5 or greater
+* Install Ruby on Rails 5.2.3 or greater
 * Install PostgreSQL 10 or greater (e.g., [Postgres.app on the Mac](https://postgresapp.com))
 
 ```
@@ -23,5 +23,12 @@ bundle install
 rake db:setup
 rails server
 ```
+
+* Asset precompilation may be necessary on some hosts
+```
+rake assets:precompile
+```
+
+
 ## About the Project
 *A project of the [Winneshiek Energy District](https://energydistrict.org) with funding provided through a [NRCS Conservation Innovation Grant](https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/programs/financial/cig/)*
