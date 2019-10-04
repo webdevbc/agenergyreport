@@ -1,4 +1,4 @@
-*.rbc
+s*.rbc
 capybara-*.html
 .rspec
 /log
@@ -47,7 +47,6 @@ node_modules/
 # Ignore precompiled assets
 public/assets/
 public/deploy/
-
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
