@@ -52,10 +52,17 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
+<<<<<<< HEAD
     brakeman (4.8.0)
     builder (3.2.4)
     byebug (11.1.1)
     capybara (3.31.0)
+=======
+    brakeman (4.7.2)
+    builder (3.2.4)
+    byebug (11.0.1)
+    capybara (3.30.0)
+>>>>>>> eb34af88dce14982bdef214e02f6c1016863b035
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -75,7 +82,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+<<<<<<< HEAD
     concurrent-ruby (1.1.6)
+=======
+    concurrent-ruby (1.1.5)
+>>>>>>> eb34af88dce14982bdef214e02f6c1016863b035
     crass (1.0.6)
     erubi (1.9.0)
     execjs (2.7.0)
@@ -84,7 +95,11 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+<<<<<<< HEAD
     httparty (0.18.0)
+=======
+    httparty (0.17.3)
+>>>>>>> eb34af88dce14982bdef214e02f6c1016863b035
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     i18n (1.8.2)
@@ -111,15 +126,24 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
+<<<<<<< HEAD
     msgpack (1.3.3)
+=======
+    msgpack (1.3.1)
+>>>>>>> eb34af88dce14982bdef214e02f6c1016863b035
     multi_xml (0.6.0)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     pg (1.2.2)
     public_suffix (4.0.3)
+<<<<<<< HEAD
     puma (3.12.4)
     rack (2.2.2)
+=======
+    puma (3.12.2)
+    rack (2.1.1)
+>>>>>>> eb34af88dce14982bdef214e02f6c1016863b035
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.1)
