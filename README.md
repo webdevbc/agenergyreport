@@ -12,8 +12,8 @@ Built using [Ruby on Rails](https://rubyonrails.org), [PostgreSQL](https://www.p
 ## Installation
 Steps to get the development application up and running at http://localhost:3000
 
-* Install Ruby 2.6.5 or greater
-* Install Ruby on Rails 5.2.3 or greater
+* Install Ruby 2.7.7 or greater
+* Install Ruby on Rails 5.2.8.1 or greater
 * Install PostgreSQL 10 or greater (e.g., [Postgres.app on the Mac](https://postgresapp.com))
 
 ```
