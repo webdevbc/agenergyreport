@@ -19,4 +19,3 @@
 //= require highcharts_theme
 //= require chartkick
 //= require counties
-//= require turbolinks
